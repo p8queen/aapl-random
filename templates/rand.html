@@ -16,7 +16,8 @@
 <body>
 <div class="container">
 <div class="row">
-<h3 class="mt-2">Random Orders - Target: {{"{:.0%}".format(target)}} </h3>
+<h3 class="mt-2 col-6">Random Orders - Target: {{"{:.0%}".format(target)}} </h3>
+<h4 class="col-6 p-2"><a href="/">Home</a></h4>
 <div class="text-success bg-dark p-2 my-3 rounded fw-bold">
     Average Days: {{"{:.2f}".format(avgDays)}}, Annual Return: {{"{:.0%}".format(annualYield)}}
     <button type="button" class="ms-5 btn btn-success" onClick="window.location.reload();">Try Again</button>
