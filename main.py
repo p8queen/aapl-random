@@ -50,53 +50,26 @@ def index(request: Request):
 
 @app.get("/contest", response_class=HTMLResponse)
 def contest(request: Request):
-        a = rn.randint(1, lenContest-5)
-        b = 1
-        with open('contest.csv') as f:
-            while b<=a:
-                f.readline()
-                b = b + 1
-            lines = [f.readline(), f.readline(), f.readline()]
-        res = {}
-        for x in lines:
-            a = x.strip('\n')
-            a= a.split(',')
-            res[a[0]] = {"avgDays": a[1], 
-                         "annualYield":float(a[2])} 
-        res = dict(sorted(res.items()))
-        data = {
-            "request": request,
-            "results": res
-        }
-        return templates.TemplateResponse("contest.html", data)
-
-@app.get("/api/{ticker}")
-def api(ticker: str):
-   tickers = {'aapl':dfaapl, 'spy':dfspy,'msft':dfmsft}
-   if ticker not in tickers:
-      return {
-         "message": "Ticker not found"
-         }
-   orders = []
-   avgDays = []
-   target = 0.10 # 10 %
-   for x in range(50):
-       buy = getTarget(target, tickers[ticker])
-       if buy is not None:
-          deltaDays = (buy['dateClose'] - buy['dateOpen']).days
-          buy['deltaDays'] = deltaDays
-          buy['timestampOpen'] = buy['dateOpen']
-          buy['dateOpen'] = datetime.strftime(buy['dateOpen'],'%d-%b-%y')
-          buy['dateClose'] = datetime.strftime(buy['dateClose'],'%d-%b-%y')
-          orders.append(buy)
-          avgDays.append(deltaDays)
-   annualYield = (1+target)**(365/mean(avgDays)) - 1 
-   data = {
-        "avgDays": mean(avgDays),
-        "target": target,
-        "annualYield": annualYield
+    a = rn.randint(1, lenContest-5)
+    b = 1
+    with open('contest.csv') as f:
+        while b<=a:
+            f.readline()
+            b = b + 1
+        lines = [f.readline(), f.readline(), f.readline()]
+    res = {}
+    for x in lines:
+        a = x.strip('\n')
+        a= a.split(',')
+        res[a[0]] = {"avgDays": a[1], 
+                        "annualYield":float(a[2])} 
+    res = dict(sorted(res.items()))
+    data = {
+        "request": request,
+        "results": res
     }
-   return data
+    return templates.TemplateResponse("contest.html", data)
+
 
 @app.get("/rand/{ticker}", response_class=HTMLResponse)
 def rand(request: Request, ticker: str):
