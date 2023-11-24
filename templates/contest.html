@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- bootstrap css cdn -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+<div class="container">
+<div class="row">
+    <h3>Contest 5 years, target: 10%</h3>
+<div class="text-center">
+<button type="button" class="btn btn-success col-2 mb-3" onClick="window.location.reload();">Try Again</button>
+</div>
+</div>
+<div class="row">
+    <table border="1" class="table table-striped table-dark">
+        <thead>
+          <tr style="text-align: left;">
+            <th class="header">Ticker</th>
+            <th class="header">Avg Days</th>
+            <th class="header">Annual Yield</th>
+          </tr>
+        </thead>
+        <tbody>
+ {% for ticker in results %}
+    <tr>
+    <td>{{ticker.upper()}}</td>
+    <td>{{results[ticker]['avgDays']}}</td>
+    <td>{{"{:.0%}".format(results[ticker]['annualYield'])}}</td>
+    </tr>
+{% endfor %}
+
+
+
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+</html>

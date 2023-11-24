@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- bootstrap css cdn -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <title>Random</title>
+    <style>
+      .header {
+        position: sticky;
+        top: 0;
+      }
+    </style>
+</head>
+<body>
+<div class="container">
+<div class="row">
+<h3 class="mt-2">Random Orders - Target: {{"{:.0%}".format(target)}} </h3>
+<div class="text-success bg-dark p-2 my-3 rounded fw-bold">
+    Average Days: {{"{:.2f}".format(avgDays)}}, Annual Return: {{"{:.0%}".format(annualYield)}}
+    <button type="button" class="ms-5 btn btn-success" onClick="window.location.reload();">Try Again</button>
+    <span class="ms-5 end-0">
+    <button type="button" class="btn btn-success" onClick="location.href = '/rand/aapl';"">AAPL</button>
+    <button type="button" class="btn btn-success" onClick="location.href = '/rand/msft';">MSFT</button>
+    <button type="button" class="btn btn-success" onClick="location.href = '/rand/spy';">SPY</button>
+    <button type="button" class="btn btn-success ms-5" onClick="location.href = '/contest';">Contest</button>
+  </span>
+</div>  
+<table border="1" class="table table-striped table-dark">
+  <thead>
+    <tr style="text-align: left;">
+      <th class="header">Days</th>
+      <th class="header">RSI</th>
+      <th class="header">Open</th>
+      <th class="header">Price</th>
+      <th class="header">Close</th>
+      <th class="header">Price</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for order in orders %}
+    <tr>
+      <td>{{order['deltaDays']}}</td>
+      <td>{{"{:.2f}".format(order['rsi'])}}</td>
+      <td>{{order['dateOpen']}}</td>
+      <td>$ {{"{:.2f}".format(order['open'])}}</td>
+      <td>{{order['dateClose']}}</td>
+      <td>$ {{"{:.2f}".format(order['close'])}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+</div>
+</div>
+</body>
+</html>
